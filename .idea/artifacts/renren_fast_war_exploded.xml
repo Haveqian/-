@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="renren-fast:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/renren_fast_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="renren-fast/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="renren-fast" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
