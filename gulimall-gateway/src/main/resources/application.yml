@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: test_gateway
+          uri: https://www.baidu.com
+          predicates:
+            - Query=url,baidu  #http://localhost:88/?url=baidu
+        - id: qq_gateway
+          uri: https://www.qq.com
+          predicates:
+            - Query=url,qq  #http://localhost:88/?url=qq
+
+        - id: product_route
+          uri: lb://gulimall-product    #https://www.baidu.com
+          predicates:
+            - Path=/dev-api/gulimallproduct/**
+          filters:
+            - RewritePath=/dev-api/(?<segment>.*), /$\{segment}
+
+        - id: ruoyi_route
+          uri: lb://ruoyi-admin    #https://www.baidu.com
+          predicates:
+            - Path=/ruoyiadmin/**
+          filters:
+            - RewritePath=/ruoyiadmin/(?<segment>.*), /$\{segment}
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+            exposedHeaders: "Content-Disposition,Content-Type,Cache-Control"
+server:
+  port: 88
